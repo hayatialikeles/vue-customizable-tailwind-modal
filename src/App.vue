@@ -6,7 +6,7 @@
 
     <Transition name="fade">
       <div
-        class="modal-overlay h-screen flex items-center justify-center w-full fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-30"
+        class="modal-overlay flex items-center justify-center overflow-y-auto fixed inset-0 bg-black bg-opacity-30 dark:bg-gray-500 dark:bg-opacity-40"
         style="z-index: 99 !important"
         v-if="show"
         @click="closeModal()"
@@ -16,14 +16,17 @@
           @mouseover="() => (isModalOver = true)"
           @mouseleave="() => (isModalOver = false)"
           style="z-index: 999 !important"
+          role="dialog"
+          aria-labelledby="modalTitle"
+          aria-describedby="modalDescription"
         >
           <slot name="header">
-            <div :class="headerContainerClass">
+            <div :class="headerContainerClass" id="modalTitle">
               <h5>{{ title }}</h5>
               <button @click="closeModal(true)" :class="closeBtnClass">X</button>
             </div>
           </slot>
-          <div :class="bodyContainerClass">
+          <div :class="bodyContainerClass" id="modalDescription">
             <slot>body content </slot>
           </div>
 
@@ -44,20 +47,22 @@ export default {
       default: "w-full rounded p-2",
     },
     containerClass: {
-      default: "w-6/12  shadow h-80 bg-gray-200 relative rounded",
+      default:
+        "w-full md:w-6/12 bg-white h-full md:h-auto  md:overflay-y-auto pt-0 mt-44 mb-4 dark:bg-gray-900 rounded",
     },
     title: {
       default: "Modal Title",
     },
     headerContainerClass: {
       default:
-        "flex justify-between card-header p-4 border-b border-opacity-50 border-black",
+        "flex justify-between card-header p-4 border-b border-opacity-50 border-black  bg-white w-full dark:bg-gray-900 dark:text-gray-300 rounded-t",
     },
+
     closeBtnClass: {
-      default: "w-6 h-6 text-black",
+      default: "w-6 h-6 text-black dark:text-gray-300",
     },
     bodyContainerClass: {
-      default: "p-4",
+      default: "h-auto py-4 px-4 ",
     },
     footerClass: {
       default: "",
