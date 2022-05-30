@@ -1,6 +1,6 @@
 {
   "name": "vue-customizable-tailwind-modal",
-  "version": "0.5.1",
+  "version": "0.5.3",
   "private": false,
   "files": ["dist"],
   "author": {

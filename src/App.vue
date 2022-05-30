@@ -26,8 +26,12 @@
               <button @click="closeModal(true)" :class="closeBtnClass">X</button>
             </div>
           </slot>
+
           <div :class="bodyContainerClass" id="modalDescription">
-            <slot>body content </slot>
+            <div v-if="isLoad" class="p-6 text-center">
+              <i class="fas fa-spinner fa-spin fa-3x"></i>
+            </div>
+            <slot v-if="!isLoad">body content </slot>
           </div>
 
           <footer :class="footerClass">
@@ -43,12 +47,16 @@
 export default {
   name: "App",
   props: {
+    isLoad: {
+      type: Boolean,
+      default: false,
+    },
     toggleBtnClass: {
       default: "w-full rounded p-2",
     },
     containerClass: {
       default:
-        "w-full md:w-6/12 bg-white h-full md:h-auto  md:overflay-y-auto pt-0 mt-44 mb-4 dark:bg-gray-900 rounded",
+        "w-full md:w-6/12 bg-white h-full md:h-auto  md:overflay-y-auto pt-0 mt-44 mb-4 dark:bg-gray-800 rounded",
     },
     title: {
       default: "Modal Title",
